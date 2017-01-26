@@ -1,0 +1,117 @@
+#Macro GUI begin
+#macro name = NClips
+#macro subroutine = clips
+#macro parameter = Name
+# type = string
+# default = Iso Clip
+#macro parameter = Locations
+#	type = location
+#	location category = geometry
+#	default = Plane 1
+#macro parameter = Clip parameter 1
+#	type = variable
+#	default = none
+#macro parameter = Clip condition 1
+# 	type = list
+#	list  = GE,EQ,LE
+#macro parameter = Condition value 1
+#	type = float
+#	default = 0.0
+#Macro GUI end
+!sub clips
+!{
+! my ($name,$location,$var,$par,$val) = @_;
+!		@locs = split ",", $location;
+! 		open test, ">C://Temp//test.txt";
+!		print test @locs;
+!		$i = 1;
+!		if($par eq "EQ"){
+!							$pp = "Equal";
+!						}elsif($par eq "GE")
+!						{
+!							$pp = "Greater Or Equal To";
+!						}else
+!						{
+!							$pp = "Less Or Equal To";
+!						}
+!		foreach $loc(@locs)
+!			{
+!				$index = sprintf("%04d",$i);
+				ISO CLIP: $name $index
+				  Apply Instancing Transform = On
+				  Apply Texture = Off
+				  Blend Texture = On
+				  Colour = 0.75, 0.75, 0.75
+				  Colour Map = Default Colour Map
+				  Colour Mode = Constant
+				  Colour Scale = Linear
+				  Colour Variable = Pressure
+				  Colour Variable Boundary Values = Hybrid
+				  Culling Mode = No Culling
+				  Domain List = /DOMAIN GROUP:All Domains
+				  Draw Faces = On
+				  Draw Lines = Off
+				  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+				  Iso Clip Geometry = Lines Only
+				  Lighting = On
+				  Line Colour = 0, 0, 0
+				  Line Colour Mode = Default
+				  Line Width = 1
+				  Location List = $loc
+				  Max = 0.0 [Pa]
+				  Min = 0.0 [Pa]
+				  Range = Global
+				  Render Edge Angle = 0 [degree]
+				  Specular Lighting = On
+				  Surface Drawing = Smooth Shading
+				  Texture Angle = 0
+				  Texture Direction = 0 , 1 , 0
+				  Texture File = 
+				  Texture Material = Metal
+				  Texture Position = 0 , 0
+				  Texture Scale = 1
+				  Texture Type = Predefined
+				  Tile Texture = Off
+				  Transform Texture = Off
+				  Transparency = 0.0
+				  Visibility = On
+				  ISO CLIP LIMITER: Iso Clip Limiter 1
+					Limiter Operation = $pp
+					Value = $val
+					Variable = $var
+					Variable Boundary Values = Hybrid
+				  END
+				  OBJECT VIEW TRANSFORM: 
+					Apply Reflection = Off
+					Apply Rotation = Off
+					Apply Scale = Off
+					Apply Translation = Off
+					Principal Axis = Z
+					Reflection Plane Option = XY Plane
+					Rotation Angle = 0.0 [degree]
+					Rotation Axis From = 0 [m], 0 [m], 0 [m]
+					Rotation Axis To = 0 [m], 0 [m], 0 [m]
+					Rotation Axis Type = Principal Axis
+					Scale Vector = 1 , 1 , 1
+					Translation Vector = 0 [m], 0 [m], 0 [m]
+					X = 0.0 [m]
+					Y = 0.0 [m]
+					Z = 0.0 [m]
+				  END
+				END
+!				$i++
+!			}
+!		close(test);
+!}
+
+# !	sub iterate{
+# !		($on,$tmp) = @_;
+# !		$name = getObjectName($tmp);
+# !		$tt = getType($name);
+# !		@params - getParameters($name);
+# !		@childs = getChildren($name,"");
+# !		#@ll = getParameters($name);
+# !		open test, ">C://Temp//test.txt";
+# !		print test @params;
+# !		close(test);
+# !	}

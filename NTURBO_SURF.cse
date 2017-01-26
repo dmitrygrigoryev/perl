@@ -1,0 +1,124 @@
+# Session file started:  2016/09/02 14:48:25
+# CFX-15.0.7 build 2014.04.26-07.00-131803
+#Macro GUI begin
+#macro name = NTurbo_Surfaces
+#macro subroutine = turbo_surfaces
+#macro parameter = Prefix
+#	 type = string
+#	 default = TS
+#macro parameter = Count
+#	type = integer
+#	default = 10
+#macro parameter = From
+#	type = float
+#	default = 0
+#macro parameter = To
+#	type = float
+#	default = 1
+#Macro GUI end
+!sub turbo_surfaces{
+!($prefix,$count,$from,$to) = @_;
+!for($i=0;$i<$count;$i++){
+!	$j = $i+1;
+!	$step = ($to-$from)/($count-1);
+!	$r = $from+$step*$i;
+!	$index = sprintf("%04d",$j);
+		TURBO SURFACE:$prefix $index
+		  Apply Instancing Transform = On
+		  Apply Texture = Off
+		  Axial Points = 10
+		  Blend Texture = On
+		  Circumferential Average Mode = None
+		  Clip Cone = On
+		  Colour = 0.75, 0.75, 0.75
+		  Colour Map = Default Colour Map
+		  Colour Mode = Constant
+		  Colour Scale = Linear
+		  Colour Variable = Pressure
+		  Colour Variable Boundary Values = Hybrid
+		  Culling Mode = No Culling
+		  Draw Faces = On
+		  Draw Lines = Off
+		  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+		  Invert Surface Bound = Off
+		  Lighting = On
+		  Line Colour = 0, 0, 0
+		  Line Colour Mode = Default
+		  Line Width = 1
+		  Max = 0.0 [Pa]
+		  Maximum Number of Sampling Points = 18
+		  Min = 0.0 [Pa]
+		  Option = Cone
+		  Point 1 = 0 [m], $r
+		  Point 2 = 1 [m], $r
+		  Point Coord System = Cylindrical
+		  Radial Points = 10
+		  Range = Global
+		  Render Edge Angle = 0 [degree]
+		  Span = 0.5
+		  Span Max = 1.0
+		  Span Min = 0.0
+		  Span Points = 10
+		  Specular Lighting = On
+		  Streamwise Location = 0.5
+		  Streamwise Max = 1.0
+		  Streamwise Min = 0.0
+		  Streamwise Points = 10
+		  Surface Bound = None
+		  Surface Drawing = Smooth Shading
+		  Surface Type = Slice
+		  Texture Angle = 0
+		  Texture Direction = 0 , 1 , 0
+		  Texture File =
+		  Texture Material = Metal
+		  Texture Position = 0 , 0
+		  Texture Scale = 1
+		  Texture Type = Predefined
+		  Theta = 0.0 [degree]
+		  Theta Max = 180.0 [degree]
+		  Theta Min = -180.0 [degree]
+		  Theta Points = 10
+		  Tile Texture = Off
+		  Transform Texture = Off
+		  Transparency = 0.0
+		  Turbo Domain List = /DOMAIN GROUP:All Domains
+		  OBJECT VIEW TRANSFORM:
+			Apply Reflection = Off
+			Apply Rotation = Off
+			Apply Scale = Off
+			Apply Translation = Off
+			Principal Axis = X
+			Reflection Plane Option = XY Plane
+			Rotation Angle = 0.0 [degree]
+			Rotation Axis From = 0 [m], 0 [m], 0 [m]
+			Rotation Axis To = 0 [m], 0 [m], 0 [m]
+			Rotation Axis Type = Principal Axis
+			Scale Vector = 1 , 1 , 1
+			Translation Vector = 0 [m], 0 [m], 0 [m]
+			X = 0.0 [m]
+			Y = 0.0 [m]
+			Z = 0.0 [m]
+		  END
+		END
+!}
+!}
+
+# Sending visibility action from ViewUtilities
+>show /TURBO SURFACE:Turbo Surface 1, view=/VIEW:View 1
+
+VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.159251, 0.0628501, 0
+    Scale = 9.27793
+    Pan = 0, 0
+    Rotation Quaternion = -0.0679692, -0.183907, 0.0418161, 0.9797
+  END
+  
+END
+
+> update
+
+# Session file stopped:  2016/09/02 14:49:13
+

@@ -1,0 +1,94 @@
+#Macro GUI begin
+#macro name = NPlanes
+#macro subroutine = planes
+#macro parameter = Count
+#	type = integer
+#	default = 10
+#macro parameter = Axis
+#	type = list
+#	list = XY, ZX, YZ
+#	default = XY
+#macro parameter = From
+#	type = float
+#	default = 0
+#macro parameter = To
+#	type = float
+#	default = 1
+#Macro GUI end
+!sub planes{
+!($count,$axis,$from,$to) = @_;
+!for($i=0;$i<$count;$i++){
+!$j = $i+1;
+!$index = sprintf("%04d",$j);
+	PLANE: Plane $index
+	  Apply Instancing Transform = On
+	  Apply Texture = Off
+	  Blend Texture = On
+	  Bound Radius = 0.5 [m]
+	  Colour = 0.75, 0.75, 0.75
+	  Colour Map = Default Colour Map
+	  Colour Mode = Constant
+	  Colour Scale = Linear
+	  Colour Variable = Pressure
+	  Colour Variable Boundary Values = Hybrid
+	  Culling Mode = No Culling
+	  Direction 1 Bound = 1.0 [m]
+	  Direction 1 Orientation = 0 [degree]
+	  Direction 1 Points = 10
+	  Direction 2 Bound = 1.0 [m]
+	  Direction 2 Points = 10
+	  Domain List = /DOMAIN GROUP:All Domains
+	  Draw Faces = On
+	  Draw Lines = Off
+	  Instancing Transform = /DEFAULT INSTANCE TRANSFORM:Default Transform
+	  Invert Plane Bound = Off
+	  Lighting = On
+	  Line Colour = 0, 0, 0
+	  Line Colour Mode = Default
+	  Line Width = 1
+	  Max = 0.0 [Pa]
+	  Min = 0.0 [Pa]
+	  Normal = 1 , 0 , 0
+	  Option = $axis Plane
+	  Plane Bound = None
+	  Plane Type = Slice
+	  Point = 0 [m], 0 [m], 0 [m]
+	  Point 1 = 0 [m], 0 [m], 0 [m]
+	  Point 2 = 1 [m], 0 [m], 0 [m]
+	  Point 3 = 0 [m], 1 [m], 0 [m]
+	  Range = Global
+	  Render Edge Angle = 0 [degree]
+	  Specular Lighting = On
+	  Surface Drawing = Smooth Shading
+	  Texture Angle = 0
+	  Texture Direction = 0 , 1 , 0
+	  Texture File = 
+	  Texture Material = Metal
+	  Texture Position = 0 , 0
+	  Texture Scale = 1
+	  Texture Type = Predefined
+	  Tile Texture = Off
+	  Transform Texture = Off
+	  Transparency = 0.0
+	  Visibility = On
+!	  if($axis eq 'XY')
+!		{
+!			$x = 0.0;
+!			$y = 0.0;
+!			$z = $from + ($to-$from)*($i)/($count-1);
+!		}elsif($axis eq 'YZ')
+!	{
+!			$x = $from + ($to-$from)*($i)/($count-1);
+!			$y = 0.0;
+!			$z = 0.0;		
+!		}else{
+!			$x = 0.0;
+!			$y = $from + ($to-$from)*($i)/($count-1);
+!			$z = 0.0;			
+!		}
+	  X = $x [m]
+	  Y = $y [m]
+	  Z = $z [m]
+	END
+!}
+!}

@@ -1,0 +1,78 @@
+#Macro GUI begin
+#macro name = TableGenerator
+#macro subroutine = generate_table
+#macro parameter = Table name
+#	type = string
+#	default = Table by TableGen
+#macro parameter = Modificator
+#	type = list
+# 	list = ave, areaAve, areaInt,massFlowAve, massFlowAveAbs
+#	default = areaAve
+#macro parameter = Variables
+#	type = string
+#	default = Pressure,Temperature
+#macro parameter = Locations
+#	type = location
+#	location category = geometry
+#Macro GUI end
+!sub generate_table
+!{
+!	my ($table_name,$mdf,$vars,$locations) = @_;
+!	@alphabet = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
+!					'P','Q','R','S','T','U','V','W','X','Y','Z') ;
+!   @vars = split(',',$vars);
+!	@locations = split(',',$locations);
+!	print TST $locations;
+!	print TST "\n\n\n";
+	TABLE: $table_name
+	  Export Table Only = True
+	  Table Exists = True
+	  Table Export Format = State
+	  Table Export HTML Border Width = 1
+	  Table Export HTML Caption Position = Bottom
+	  Table Export HTML Cell Padding = 5
+	  Table Export HTML Cell Spacing = 1
+	  Table Export Lines = All
+	  Table Export Separator = Tab
+	  Table Export Trailing Separators = True
+	  TABLE CELLS: 
+!	foreach $var(@vars)
+!			{
+!				$col_ind = shift @alphabet;
+!				$head_ind=$col_ind.'1';
+				$head_ind = "$var", True, False, False, Center, False, 0, Font Name, 1|1, %10.3e, True, d5fdff, 000000, True
+!				for($i=0;$i<=$#locations;$i++)
+!						{
+# !							print TST $locations[$i];
+!							
+!							$row_ind = $col_ind.($i+2);
+# !							print TST $row_ind
+!							$location_name = getObjectName($locations[$i]);	
+!							if (($i+2)%2 == 0)
+!								{
+									$row_ind = "=$mdf($var)@$location_name", False, False, False, Center, False, 0, Font Name, 1|1, %10.3e, False, ffffff, 000000, True
+!								}else
+!								{
+									$row_ind = "=$mdf($var)@$location_name", False, False, False, Center, False, 0, Font Name, 1|1, %10.3e, False, f5f5f5, 000000, True
+!								}
+							
+!						}
+!			}
+!			$loc_index = shift @alphabet;
+!			$head_ind=$loc_index.'1';
+			$head_ind = "Location", True, False, False, Center, False, 0, Font Name, 1|1, %10.3e, True, d5fdff, 000000, True
+!			for($i=0;$i<=$#locations;$i++){ 
+!											$location_name = getObjectName($locations[$i]);
+!											$loc_ind = $loc_index.($i+2);	
+!											if (($i+2)%2 == 0)
+!												{
+													$loc_ind = "$location_name", False, False, False, Center, False, 0, Font Name, 1|1, %10.3e, False, ffffff, 000000, True
+!												}else
+!												{
+													$loc_ind = "$location_name", False, False, False, Center, False, 0, Font Name, 1|1, %10.3e, False, f5f5f5, 000000, True
+!												}
+							
+!											} 			
+	  END
+	END
+!}
