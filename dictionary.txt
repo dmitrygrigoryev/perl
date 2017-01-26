@@ -1,0 +1,12 @@
+#Inlet
+Inlet,Vhod,Input,CURV  
+#Outlet
+Outlet,Out,Vyhod,OUT_INTERF
+#Symmetry
+Symmetry,Symm,Sym,Mirror,PER
+#Wall
+Wall,Stena,Stenka,Shaft,Hub,Shroud,Blade,Fillet_
+#Opening
+Opening, Opn, Entraiment
+#Interface
+Int, Interface, Inter
